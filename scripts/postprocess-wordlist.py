@@ -17,16 +17,14 @@ def parse(line):
 
     return line.strip()
 
-out = open("transformed.txt", "a")
-entries = {}
+with open("transformed.txt", "a") as out:
+    entries = {}
 
-with open('input.txt', 'r') as f:
-    for line in f.readlines():
-        line = b64encode(parse(line).encode('utf-8')).decode('utf-8')
-        if entries.get(line):
-            continue
+    with open('input.txt', 'r') as f:
+        for line in f:
+            line = b64encode(parse(line).encode('utf-8')).decode('utf-8')
+            if entries.get(line):
+                continue
 
-        out.write(line + "\n")
-        entries[line] = True
-
-out.close()
+            out.write(line + "\n")
+            entries[line] = True
